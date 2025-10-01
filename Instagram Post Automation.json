@@ -80,7 +80,7 @@
               "role": "model"
             },
             {
-              "content": "=Find 2 of the most recent, trending, and relevant real estate news articles in Asia or Southeast Asia.  \nFor each article, return: title, summary, url.  \n\nThen:  \n1. Write one Instagram caption that combines the insights from these articles (around 150 words, professional, no emojis, paragraphs with commas and periods instead of em dashes).  \n2. Generate 2–3 relevant hashtags automatically.  \n3. Suggest 2 keywords to search for a relevant image on Pexels.  \n\nOutput format in JSON:\n{\n  \"articles\": [\n    {\n      \"title\": \"Title here\",\n      \"summary\": \"Summary here\",\n      \"url\": \"https://example.com\"\n    }\n  ],\n  \"caption\": \"Your full Instagram caption here\",\n  \"hashtags\": [\"#Example1\", \"#Example2\"],\n  \"imageKeywords\": [\"keyword1\", \"keyword2\"]\n}\n\nDo not include anything else outside this JSON."
+              "content": "=Find 2 of the most recent, trending, and relevant real estate news articles in Asia or Southeast Asia.  \nFor each article, return: title, summary, url.  \n\nThen:  \n1. Write one Instagram caption that combines the insights from these articles (around 100 words, professional, no emojis, two short paragraphs separated by a line spacing. Use commas and periods instead of em dashes).  \n2. Generate 2–3 relevant hashtags automatically.  \n3. Suggest 2 keywords to search for a relevant image on Pexels.  \n\nOutput format in JSON:\n{\n  \"articles\": [\n    {\n      \"title\": \"Title here\",\n      \"summary\": \"Summary here\",\n      \"url\": \"https://example.com\"\n    }\n  ],\n  \"caption\": \"Your full Instagram caption here\",\n  \"hashtags\": [\"#Example1\", \"#Example2\"],\n  \"imageKeywords\": [\"keyword1\", \"keyword2\"]\n}\n\nDo not include anything else outside this JSON."
             }
           ]
         },
@@ -185,17 +185,6 @@
       ],
       "id": "2e374535-4190-4589-8421-6af65c1dda39",
       "name": "If"
-    },
-    {
-      "parameters": {},
-      "type": "n8n-nodes-base.noOp",
-      "typeVersion": 1,
-      "position": [
-        1120,
-        -192
-      ],
-      "id": "58f5c84a-910f-4048-8227-a76709b1e776",
-      "name": "No Operation, do nothing"
     },
     {
       "parameters": {
@@ -309,17 +298,6 @@
       }
     },
     {
-      "parameters": {},
-      "type": "n8n-nodes-base.noOp",
-      "typeVersion": 1,
-      "position": [
-        2016,
-        -96
-      ],
-      "id": "c33dc452-a744-470b-835e-fb3bc6bab372",
-      "name": "No Operation, do nothing1"
-    },
-    {
       "parameters": {
         "assignments": {
           "assignments": [
@@ -396,48 +374,6 @@
           "name": "Google Drive account"
         }
       }
-    },
-    {
-      "parameters": {
-        "assignments": {
-          "assignments": [
-            {
-              "id": "78cecb13-a8b3-45c7-8a56-9a4f7deb003e",
-              "name": "caption",
-              "value": "=\"={{$node['Output cleaner'].json['caption']}}\"",
-              "type": "string"
-            },
-            {
-              "id": "740c450a-c6d1-4aa0-96da-39a6c038e9d4",
-              "name": "image_url",
-              "value": "=\"={{$node['Upload file'].json['webContentLink']}},",
-              "type": "string"
-            },
-            {
-              "id": "558ece73-60cb-4c0a-ae06-ff85c7468206",
-              "name": "file_id",
-              "value": "=\"={{$node['Upload file'].json['id']}}\"",
-              "type": "string"
-            },
-            {
-              "id": "4bdc7b66-8c56-4b01-814c-dc38daeeebf7",
-              "name": "hashtag",
-              "value": "={{ $('Output cleaner').item.json.hashtags }}",
-              "type": "string"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.4,
-      "position": [
-        2912,
-        96
-      ],
-      "id": "0dd670c7-ff84-42c3-8b04-55f766af925e",
-      "name": "Prepare for Buffer",
-      "alwaysOutputData": true
     },
     {
       "parameters": {
@@ -654,6 +590,48 @@
       ],
       "id": "7cecf7e3-e033-4bb2-9538-9fa63d43cba3",
       "name": "IG Publish"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "78cecb13-a8b3-45c7-8a56-9a4f7deb003e",
+              "name": "caption",
+              "value": "=\"={{$node['Output cleaner'].json['caption']}}\"",
+              "type": "string"
+            },
+            {
+              "id": "740c450a-c6d1-4aa0-96da-39a6c038e9d4",
+              "name": "image_url",
+              "value": "=\"={{$node['Upload file'].json['webContentLink']}},",
+              "type": "string"
+            },
+            {
+              "id": "558ece73-60cb-4c0a-ae06-ff85c7468206",
+              "name": "file_id",
+              "value": "=\"={{$node['Upload file'].json['id']}}\"",
+              "type": "string"
+            },
+            {
+              "id": "4bdc7b66-8c56-4b01-814c-dc38daeeebf7",
+              "name": "hashtag",
+              "value": "={{ $('Output cleaner').item.json.hashtags }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        2912,
+        96
+      ],
+      "id": "0dd670c7-ff84-42c3-8b04-55f766af925e",
+      "name": "Preparation",
+      "alwaysOutputData": true
     }
   ],
   "pinData": {
@@ -735,7 +713,7 @@
       "main": [
         [
           {
-            "node": "No Operation, do nothing",
+            "node": "AI Social Media Expert",
             "type": "main",
             "index": 0
           }
@@ -775,7 +753,7 @@
       "main": [
         [
           {
-            "node": "No Operation, do nothing1",
+            "node": "Pexel image search",
             "type": "main",
             "index": 0
           }
@@ -815,18 +793,7 @@
       "main": [
         [
           {
-            "node": "Prepare for Buffer",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Prepare for Buffer": {
-      "main": [
-        [
-          {
-            "node": "Append row in sheet",
+            "node": "Preparation",
             "type": "main",
             "index": 0
           }
@@ -854,13 +821,24 @@
           }
         ]
       ]
+    },
+    "Preparation": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "active": false,
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "2a59a317-5c00-40bb-8881-875e42566ddf",
+  "versionId": "eaac531b-da10-4595-8d5e-5911d92a2786",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "767cc717f8a616684e6b65293e43baf30770c7debee3ed1c859ed01b61412932"
