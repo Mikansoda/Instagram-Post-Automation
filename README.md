@@ -1,4 +1,4 @@
-# About the project: A backend system to manage inventory management
+# About the project: An automation tool to create scheduled Instagram Posts
 This project is an automated and semi-automated Instagram post that creates posts images, captions, and hashtags based on recent, trending, and relevant property/real estate news. For inability of obtaining Instagram API key, semi-automation routes using Buffer scheduler is provided.
 
 # Tech stack
